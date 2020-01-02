@@ -1,36 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import LogContext from '../../context/logs/logContext';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 const EditLogModal = () => {
-  const [message, setMessage] = useState('');
-  const [attention, setAttention] = useState(false);
-  const [tech, setTech] = useState('');
+  const logContext = useContext(LogContext);
 
-  const onSubmit = () => {
-    if (message === '' || tech === '') {
-      M.toast({
-        html: 'Please Enter a Message and a Tech'
-      });
+  const { current, updateLog, clearCurrent } = logContext;
+
+  useEffect(() => {
+    if (current !== null) {
+      setlog(current);
     } else {
-      console.log(message, attention, tech);
+      setlog({
+        message: '',
+        attention: false,
+        tech: ''
+      });
+    }
+  }, [logContext, current]);
+
+  const [log, setlog] = useState({
+    message: '',
+    attention: false,
+    tech: ''
+  });
+
+  const { id, message, attention, tech } = log;
+
+  const onChange = e => {
+    setlog({ ...log, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = e => {
+    e.preventDefault();
+    if (current !== null) {
+      updateLog(log);
+      M.toast({ html: `Log with ID #${id} Updated` });
 
       //Clear form
-      setMessage('');
-      setAttention(false);
-      setTech('');
+      setlog({
+        message: '',
+        attention: false,
+        tech: ''
+      });
     }
   };
 
   return (
     <div id="edit-log-modal" className="modal" style={modalStyle}>
       <div className="modal-content">
-        <h4>Enter System Log</h4>
+        <h4>Edit System Log</h4>
         <div className="row">
           <div className="input-field">
             <input
               type="text"
+              name="message"
               value={message}
-              onChange={e => setMessage(e.target.value)}
+              onChange={onChange}
+              placeholder=" "
             />
             <label htmlFor="message" className="active">
               Log Message
@@ -43,7 +70,7 @@ const EditLogModal = () => {
               name="tech"
               value={tech}
               className="browser-default"
-              onChange={e => setTech(e.target.value)}
+              onChange={onChange}
             >
               <option value="" disabled>
                 Select Technician
@@ -60,9 +87,10 @@ const EditLogModal = () => {
               <label>
                 <input
                   type="checkbox"
+                  name="attention"
                   checked={attention}
                   value={attention}
-                  onChange={e => setAttention(!attention)}
+                  onChange={onChange}
                 />
                 <span>Needs Attention</span>
               </label>

@@ -7,6 +7,8 @@ import EditLogModal from './components/logs/EditLogModal';
 import AddTechModal from './components/techs/AddTechModal';
 import TechListModal from './components/techs/TechListModal';
 
+import LogState from './context/logs/LogState';
+
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
 import './App.css';
@@ -16,17 +18,19 @@ function App() {
     M.AutoInit();
   });
   return (
-    <Fragment>
-      <SearchBar />
-      <div className="container">
-        <AddLogModal />
-        <EditLogModal />
-        <AddTechModal />
-        <TechListModal />
-        <AddBtn />
-        <Logs />
-      </div>
-    </Fragment>
+    <LogState>
+      <Fragment>
+        <SearchBar />
+        <div className="container">
+          <AddLogModal />
+          <EditLogModal />
+          <AddTechModal />
+          <TechListModal />
+          <AddBtn />
+          <Logs />
+        </div>
+      </Fragment>
+    </LogState>
   );
 }
 
