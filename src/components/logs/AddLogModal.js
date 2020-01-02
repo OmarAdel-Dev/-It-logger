@@ -1,11 +1,19 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import LogsContext from '../../context/logs/logContext';
+import TechsContext from '../../context/techs/techContext';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 const AddLogModal = () => {
   const logsContext = useContext(LogsContext);
+  const techContext = useContext(TechsContext);
 
   const { addLog } = logsContext;
+  const { techs, loading, getTechs } = techContext;
+
+  useEffect(() => {
+    getTechs();
+    //eslint-disable-next-line
+  }, []);
 
   const [log, setlog] = useState({
     message: '',
@@ -66,9 +74,18 @@ const AddLogModal = () => {
               <option value="" disabled>
                 Select Technician
               </option>
-              <option value="Rawan">Rawan</option>
-              <option value="Yumna">Yumna</option>
-              <option value="Ahmed">Ahmed</option>
+              {!loading && techs.length === 0 ? (
+                <p>No techs to show</p>
+              ) : (
+                techs.map(tech => (
+                  <option
+                    key={tech.id}
+                    value={tech.firstName + ' ' + tech.lastName}
+                  >
+                    {tech.firstName} {tech.lastName}
+                  </option>
+                ))
+              )}
             </select>
           </div>
         </div>

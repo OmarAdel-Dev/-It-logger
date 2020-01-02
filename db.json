@@ -1,35 +1,30 @@
 {
   "logs": [
     {
-      "message": "First log message 111",
+      "message": "Server #76 is down",
       "attention": "false",
-      "tech": "Rawan",
-      "date": "2019-12-31T15:01:47.408Z",
+      "tech": "John Wick",
+      "date": "2020-01-02T15:09:39.717Z",
       "id": 1
     },
     {
-      "message": "Hala people",
-      "attention": false,
-      "tech": "Ahmed",
-      "date": "2020-01-02T13:08:57.744Z",
+      "message": "Server #88 is up and runnig",
+      "attention": "false",
+      "tech": "Robert Deniro",
+      "date": "2020-01-02T15:10:01.471Z",
       "id": 2
     }
   ],
   "techs": [
     {
-      "id": 1,
-      "firstName": "John",
-      "lastName": "Doe"
+      "firstName": "Robert",
+      "lastName": "Deniro",
+      "id": 3
     },
     {
-      "id": 2,
-      "firstName": "Sam",
-      "lastName": "Smith"
-    },
-    {
-      "id": 3,
-      "firstName": "Sara",
-      "lastName": "Wilson"
+      "firstName": "John ",
+      "lastName": "Wick",
+      "id": 4
     }
   ]
 }

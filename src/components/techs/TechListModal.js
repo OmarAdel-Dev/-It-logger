@@ -1,22 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 import TechItem from './TechItem';
+import TechContext from '../../context/techs/techContext';
 
 const TechListModal = () => {
-  const [techs, setTechs] = useState([]);
-  const [loading, setLoading] = useState(false);
+  const techContext = useContext(TechContext);
+
+  const { techs, loading, getTechs } = techContext;
 
   useEffect(() => {
     getTechs();
     //eslint-disable-next-line
   }, []);
-
-  const getTechs = async () => {
-    setLoading(true);
-    const res = await fetch('/techs');
-    const data = await res.json();
-    setTechs(data);
-    setLoading(false);
-  };
 
   return (
     <div id="tech-list" className="modal">

@@ -1,9 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import TechContext from '../../context/techs/techContext';
 import M from 'materialize-css/dist/js/materialize.min.js';
 
 const AddLogModal = () => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
+  const techContext = useContext(TechContext);
+
+  const { addTech } = techContext;
+
+  const [tech, settech] = useState({
+    firstName: '',
+    lastName: ''
+  });
+
+  const { firstName, lastName } = tech;
+
+  const onChange = e => {
+    settech({ ...tech, [e.target.name]: e.target.value });
+  };
 
   const onSubmit = () => {
     if (firstName === '' || lastName === '') {
@@ -11,10 +24,15 @@ const AddLogModal = () => {
         html: 'Please Enter the First and Last Names'
       });
     } else {
-      console.log(firstName, lastName);
+      addTech(tech);
+      M.toast({
+        html: `Tech ${firstName} ${lastName} was added to Techs list`
+      });
       //Clear form
-      setFirstName('');
-      setLastName('');
+      settech({
+        firstName: '',
+        lastName: ''
+      });
     }
   };
 
@@ -26,8 +44,9 @@ const AddLogModal = () => {
           <div className="input-field">
             <input
               type="text"
+              name="firstName"
               value={firstName}
-              onChange={e => setFirstName(e.target.value)}
+              onChange={onChange}
             />
             <label htmlFor="firstName" className="active">
               Log firstName
@@ -38,8 +57,9 @@ const AddLogModal = () => {
           <div className="input-field">
             <input
               type="text"
+              name="lastName"
               value={lastName}
-              onChange={e => setLastName(e.target.value)}
+              onChange={onChange}
             />
             <label htmlFor="lastName" className="active">
               Log lastName

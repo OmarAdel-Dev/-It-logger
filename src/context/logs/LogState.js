@@ -9,8 +9,6 @@ import {
   SET_CURRENT,
   CLEAR_CURRENT,
   UPDATE_LOG,
-  CLEAR_LOGS,
-  SET_LOADING,
   LOGS_ERROR,
   SEARCH_LOGS
 } from '../types';

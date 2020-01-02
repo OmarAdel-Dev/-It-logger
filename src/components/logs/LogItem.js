@@ -6,7 +6,7 @@ import M from 'materialize-css/dist/js/materialize.min.js';
 
 const LogItem = ({ log }) => {
   const logContext = useContext(LogsContext);
-  const { deleteLog, setCurrent, clearCurrent } = logContext;
+  const { deleteLog, setCurrent } = logContext;
 
   const { id } = log;
 

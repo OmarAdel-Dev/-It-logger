@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import LogContext from '../../context/logs/logContext';
 import LogItem from './LogItem';
 import Preloader from '../layout/Preloader';

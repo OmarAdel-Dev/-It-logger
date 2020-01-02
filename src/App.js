@@ -8,6 +8,7 @@ import AddTechModal from './components/techs/AddTechModal';
 import TechListModal from './components/techs/TechListModal';
 
 import LogState from './context/logs/LogState';
+import TechState from './context/techs/TechState';
 
 import 'materialize-css/dist/css/materialize.min.css';
 import M from 'materialize-css/dist/js/materialize.min.js';
@@ -19,17 +20,19 @@ function App() {
   });
   return (
     <LogState>
-      <Fragment>
-        <SearchBar />
-        <div className="container">
-          <AddLogModal />
-          <EditLogModal />
-          <AddTechModal />
-          <TechListModal />
-          <AddBtn />
-          <Logs />
-        </div>
-      </Fragment>
+      <TechState>
+        <Fragment>
+          <SearchBar />
+          <div className="container">
+            <AddLogModal />
+            <EditLogModal />
+            <AddTechModal />
+            <TechListModal />
+            <AddBtn />
+            <Logs />
+          </div>
+        </Fragment>
+      </TechState>
     </LogState>
   );
 }
