@@ -23,7 +23,7 @@ function App() {
       <TechState>
         <Fragment>
           <SearchBar />
-          <div className="container">
+          <div>
             <AddLogModal />
             <EditLogModal />
             <AddTechModal />
